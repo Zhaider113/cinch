@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class event extends Model
+class CategoryTip extends Model
 {
     use HasFactory;
-    
-    public function rides()
+    public function category()
     {
-        return $this->hasMany(RidePost::class);
+        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
 }

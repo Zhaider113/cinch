@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class Category extends Model
 {
     use HasFactory;
+    protected $table = "categories";
 
-    protected $table = "notifications";
     protected $hidden = ['created_at', 'updated_at'];
 
-    function getNotificationTimeAttribute($value)
+    public function categoryTips()
     {
-        return json_decode($value);        
+        return $this->hasMany(CategoryTip::class);
     }
+
 }

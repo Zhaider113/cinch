@@ -27,7 +27,6 @@ class UserSeeder extends Seeder
             'email' => 'user@gmail.com',
             'password' => bcrypt('12345678'),
             'connect_account_id' => 'acct_1O2JtCFM7VrSpgSB',
-            'wallet_balance' => '1000',
             'type' => USER_TYPES['user'],
         ]);
 

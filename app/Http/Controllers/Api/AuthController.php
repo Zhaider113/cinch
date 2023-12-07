@@ -64,8 +64,8 @@ class AuthController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'country_code' => 'sometimes|nullable',
-            'phone' => 'sometimes|nullable|unique:users',         
+            // 'country_code' => 'sometimes|nullable',
+            // 'phone' => 'sometimes|nullable|unique:users',         
             'password' => 'required|string|min:6',
             'confirm_password' => 'required|min:6|same:password',            
         ]);
@@ -213,15 +213,6 @@ class AuthController extends Controller
                 $user->email = strtolower($request->email);
             }
           	
-          	if($request->has('country_code') && $request->country_code != "" && $request->has('phone') && $request->phone != "")
-            {
-            	$already = User::where('phone', $request->phone)->where('country_code', $request->country_code)->where('id', '!=', $user->id)->first('id');
-                if(!empty($already)) {
-                    return $this->error('Phone number has already been taken');
-                }
-                $user->country_code = $request->country_code;
-              	$user->phone = $request->phone;
-            }  
             if ($request->has('profile_image')) {
                 if ($request->profile_image->getClientOriginalExtension() == 'PNG' || $request->profile_image->getClientOriginalExtension() == 'png' || $request->profile_image->getClientOriginalExtension() == 'JPG' || $request->profile_image->getClientOriginalExtension() == 'jpg' || $request->profile_image->getClientOriginalExtension() == 'jpeg' || $request->profile_image->getClientOriginalExtension() == 'JPEG') {
                     $this->deleteExistingImage($user->id);
@@ -234,12 +225,9 @@ class AuthController extends Controller
                     return $this->error('Choose a Valid Image');
                 }
             }
-            if ($request->has('latitude') && $request->latitude != "") {
-                $user->latitude = $request->latitude;
+            if ($request->has('weight') && $request->weight != "") {
+                $user->weight = $request->weight;
             }
-            if ($request->has('longitude') && $request->longitude != "") {
-                $user->longitude = $request->longitude;
-            }            
             if ($request->has('device_type') && $request->device_type != "") {
                 $user->device_type = $request->device_type;
             }
