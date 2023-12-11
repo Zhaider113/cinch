@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Klima App</title>
+    <title>CINCHApp</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('fav1.png') }}">
 
     <!-- Custom fonts for this template-->

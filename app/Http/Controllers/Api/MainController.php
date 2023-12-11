@@ -671,7 +671,7 @@ class MainController extends Controller
                         "amount" => 100 * (float)$booking->total_seats_price,
                         "currency" => 'USD',
                         "source" => $token->id,
-                        "description" => "Klima Payment",
+                        "description" => "CINCHPayment",
                     ]);
     
                     if ($pay->status == 'succeeded') {

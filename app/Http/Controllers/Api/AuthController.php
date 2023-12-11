@@ -109,7 +109,6 @@ class AuthController extends Controller
             $res = '%'.$search_term.'%';
 
             $user = User::orWhere('email', $search_term)
-            ->orWhere('phone', $search_term)
             ->first();
             
             if(!empty($user)){

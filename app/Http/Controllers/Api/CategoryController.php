@@ -29,8 +29,23 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::find($id);
-            $categoryTips = CategoryTip::where('category_id', $category->id)->get();
-            return $this->success([$category->count() > 0 ? 'Category Found' : 'No Category Found', [$category, $categoryTips]]);
+            $categoryTips = CategoryTip::where('category_id', $category->id)->orderBy('views', 'desc')->get();
+            return $this->success([$category->count() > 0 ? 'Category Found' : 'No Category Found', ["item"=>$category, "tips"=>$categoryTips]]);
+        } catch (\Throwable $th) {
+            return $this->error($th->getMessage());
+        }
+    }
+
+    /**
+     * Display the specified Tip.
+     */
+    public function viewTip(string $id)
+    {
+        try {
+            $tip = CategoryTip::find($id);
+            $tip->views = $tip->views+1;
+            $tip->save();
+            return $this->success([$tip->count() > 0 ? 'Tip Found' : 'No Tip Found', $tip]);
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }

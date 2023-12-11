@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\FoodCategoryController;
 use App\Http\Controllers\Api\MainController;
 /*
 |--------------------------------------------------------------------------
@@ -40,5 +41,11 @@ Route::group(['prefix' => 'v1/auth'], function(){
 
 Route::group(['prefix' => 'v1/app'], function(){    
     Route::get('categories', [CategoryController::class, 'index']);      
-    Route::get('categories/{id}', [CategoryController::class, 'show']);      
+    Route::get('categories/{id}', [CategoryController::class, 'show']);
+    Route::get('food-categories', [FoodCategoryController::class, 'index']);      
+    Route::get('food-category/{id}/courses', [FoodCategoryController::class, 'foodCourses']);      
+    Route::get('food-category/{id}/popular-courses', [FoodCategoryController::class, 'popularCourses']);      
+    Route::get('course/{id}', [FoodCategoryController::class, 'viewCourse']);      
+    Route::get('view-tip/{id}', [CategoryController::class, 'viewTip']);      
+
 });

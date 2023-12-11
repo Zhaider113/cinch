@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\RidePost;
-use App\Models\Booking;
-use App\Models\UserVehicle;
-use App\Models\PickupPoint;
+use App\Models\Category;
+use App\Models\CategoryTip;
+use App\Models\FoodCategory;
 
 class AdminNavigationController extends Controller
 {
@@ -16,10 +15,9 @@ class AdminNavigationController extends Controller
     {
         $verified_users = User::where('type', '1')->where('is_verified', '1')->count();
         $users = User::where('type', '1')->where('is_verified', '0')->get();
-        $posts = RidePost::get();
-        $bookings = Booking::get();
-        $vehicles = UserVehicle::get();
-        $pickupPoints = PickupPoint::get();
-        return view('admin.dashboard', compact(['users', 'verified_users', 'posts', 'bookings', 'vehicles', 'pickupPoints']));
+        $category = Category::get();
+        $categoryTips = CategoryTip::get();
+        $foodCategory = FoodCategory::get();
+        return view('admin.dashboard', compact(['users', 'verified_users', 'category', 'categoryTips', 'foodCategory']));
     }  
 }

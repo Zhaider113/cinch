@@ -33,6 +33,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::resource('register-user', App\Http\Controllers\UserRegistrationController::class);
 Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'CheckUserRole']], function() {
     Route::get('/', [App\Http\Controllers\Admin\AdminNavigationController::class, 'dashboard'])->name('dashboard');	
+	Route::resource('users', App\Http\Controllers\Admin\AllUserController::class);
+    Route::resource('category', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('tips', App\Http\Controllers\Admin\CategoryTipController::class);
+    Route::resource('food', App\Http\Controllers\Admin\FoodCategoryController::class);
 });
 
 Route::prefix('dev')->group(function(){

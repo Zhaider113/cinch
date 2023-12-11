@@ -16,5 +16,9 @@ class Category extends Model
     {
         return $this->hasMany(CategoryTip::class);
     }
+    public function foodCategory()
+    {
+        return $this->hasMany(FoodCategory::class);
+    }
 
 }
