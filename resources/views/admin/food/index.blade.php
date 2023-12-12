@@ -4,7 +4,7 @@
 <div class="mt-3">
     <div class="row">
         <div class="col-md-9 ">
-            <h4>Event List</h4>
+            <h4>Food Categgory List</h4>
             @if(session()->has('message'))
                 <div class="alert alert-success text-center">
                     {{ session()->get('message') }}
@@ -59,14 +59,14 @@
                                         <td>                                            
                                             <div class="row pl-3">                                                    
                                                 <div class = "col-md-2">
-                                                    <form action="{{ route('admin.food.destroy', $event->id) }}" method = "POST">
+                                                    <form action="{{ route('admin.food.destroy', $food->id) }}" method = "POST">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
-                                                        <button type = "submit" name = "submit" value = "submit" data-toggle="tooltip" title="Delete Event" onclick = "return confirm('Do You Really Want to Delete?')" class = "btn btn-sm btn-circle btn-outline-danger" style = "margin-left: -10px;"><i class = "fa fa-trash"></i></button>
+                                                        <button type = "submit" name = "submit" value = "submit" data-toggle="tooltip" title="Delete Food Categgory" onclick = "return confirm('Do You Really Want to Delete?')" class = "btn btn-sm btn-circle btn-outline-danger" style = "margin-left: -10px;"><i class = "fa fa-trash"></i></button>
                                                     </form>
                                                 </div> 
                                                 <div class="col-md-2 ml-2">
-                                                    <button type = "buttton" name = "edit" data-toggle="tooltip" title="Edit Event"  class = "btn btn-sm btn-circle btn-outline-primary" style = "margin-left: -10px;"><i class = "fa fa-pen"></i></button>
+                                                    <button type = "buttton" name = "edit" data-toggle="tooltip" title="Edit Food Categgory"  class = "btn btn-sm btn-circle btn-outline-primary" style = "margin-left: -10px;"><i class = "fa fa-pen"></i></button>
                                                 </div>
                                             </div>                                           
                                         </td>

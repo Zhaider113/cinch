@@ -35,7 +35,7 @@
         <span>Users</span></a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('admin.category.index')}}">
         <i class="fas fa-fw fa-users"></i>
         <span>Category</span></a>
 </li>
@@ -47,7 +47,7 @@
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">           
-            <a class="collapse-item" href="#">List</a>
+            <a class="collapse-item" href="{{route('admin.food.index')}}">List</a>
             <a class="collapse-item" href="#">Add</a>
         </div>
     </div>

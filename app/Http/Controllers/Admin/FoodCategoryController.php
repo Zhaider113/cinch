@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\FoodCategory;
-use App\Http\Requests\StoreFoodCategoryRequest;
-use App\Http\Requests\UpdateFoodCategoryRequest;
+use App\Http\Controllers\Controller;
 
 class FoodCategoryController extends Controller
 {
@@ -13,7 +12,9 @@ class FoodCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $foods = FoodCategory::with('category')->orderBy('id', 'desc')->get();
+
+        return view('admin.food.index', compact('foods'));
     }
 
     /**
@@ -21,13 +22,13 @@ class FoodCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.food.add');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFoodCategoryRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class FoodCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FoodCategory $foodCategory)
+    public function show(string $id)
     {
         //
     }
@@ -43,7 +44,7 @@ class FoodCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FoodCategory $foodCategory)
+    public function edit(string $id)
     {
         //
     }
@@ -51,7 +52,7 @@ class FoodCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFoodCategoryRequest $request, FoodCategory $foodCategory)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,8 +60,22 @@ class FoodCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoodCategory $foodCategory)
+    public function destroy(string $id)
     {
-        //
+        try{
+            $food = FoodCategory::where('id', $id)->first();
+
+            if(empty($food))
+            {
+                return back()->with('error', 'Food Category does not Exists');
+            }
+
+            $food->save();
+
+            return back()->with('message', 'Food Category Deleted.....!');
+        }catch(\Exception $e)
+        {
+            return back()->with('error', 'There is some trouble to proceed your action');
+        }
     }
 }
