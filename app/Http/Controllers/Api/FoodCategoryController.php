@@ -43,7 +43,16 @@ class FoodCategoryController extends Controller
 
     public function popularCourses(string $id){
         try {
-            $course = FoodCourse::where('food_id',$id)->orderBy('views', 'desc')->get();
+            $course = FoodCourse::where('food_id',$id)->orderBy('views', 'desc')->limit(4)->get();
+            return $this->success([sizeof($course) > 0 ? 'Course Found' : 'No Course Found', $course]);
+        } catch (\Throwable $th) {
+            return $this->error($th->getMessage());
+        }
+    }
+
+    public function allPopularCourses(string $id){
+        try {
+            $course = FoodCourse::orderBy('views', 'desc')->get();
             return $this->success([sizeof($course) > 0 ? 'Course Found' : 'No Course Found', $course]);
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());

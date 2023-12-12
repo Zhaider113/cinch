@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->string('feeding_window');
             $table->timestamps();
         });
     }
