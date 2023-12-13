@@ -43,8 +43,8 @@ Route::group(['prefix' => 'v1/app'], function(){
     Route::get('categories', [CategoryController::class, 'index']);      
     Route::post('view-category', [CategoryController::class, 'show']);
     Route::get('food-categories', [FoodCategoryController::class, 'index']);      
-    Route::get('food-category/{id}/courses', [FoodCategoryController::class, 'foodCourses']);      
-    Route::get('food-category/{id}/popular-courses', [FoodCategoryController::class, 'popularCourses']);      
+    Route::get('food-category/courses/{id}', [FoodCategoryController::class, 'foodCourses']);      
+    Route::get('food-category/popular-courses/{id}', [FoodCategoryController::class, 'popularCourses']);      
     Route::get('food-category/popular-courses', [FoodCategoryController::class, 'allPopularCourses']);      
     Route::get('course/{id}', [FoodCategoryController::class, 'viewCourse']);      
     Route::get('view-tip/{id}', [CategoryController::class, 'viewTip']);      
