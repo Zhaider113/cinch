@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\FoodCategory;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use DB;
 
 class FoodCategoryController extends Controller
 {
@@ -13,8 +16,8 @@ class FoodCategoryController extends Controller
     public function index()
     {
         $foods = FoodCategory::with('category')->orderBy('id', 'desc')->get();
-
-        return view('admin.food.index', compact('foods'));
+        $categories = Category::get();
+        return view('admin.food.index', compact('foods','categories'));
     }
 
     /**
@@ -30,7 +33,12 @@ class FoodCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $foods = new FoodCategory;
+        $foods->category_id  = $request->category_id;
+        $foods->title = $request->title;
+        
+        $foods->save();       
+        return back()->with('message','Food Category Add successfully');
     }
 
     /**
@@ -70,7 +78,7 @@ class FoodCategoryController extends Controller
                 return back()->with('error', 'Food Category does not Exists');
             }
 
-            $food->save();
+            $food->delete();
 
             return back()->with('message', 'Food Category Deleted.....!');
         }catch(\Exception $e)

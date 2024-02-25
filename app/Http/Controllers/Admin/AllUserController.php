@@ -105,10 +105,11 @@ class AllUserController extends Controller
                 return back()->with('error', 'User does not Exists');
             }
 
-            $user->is_verified = 0;
-            $user->save();
+            // $user->is_verified = 0;
+            // $user->save();
+            $user->delete();
 
-            return back()->with('message', 'User Disabled.....!');
+            return back()->with('message', 'User Deleted.....!');
         }catch(\Exception $e)
         {
             return back()->with('error', 'There is some trouble to proceed your action');

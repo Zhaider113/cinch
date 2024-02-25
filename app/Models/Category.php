@@ -20,9 +20,5 @@ class Category extends Model
     {
         return $this->hasMany(FoodCategory::class);
     }
-    public function userCategory()
-    {
-        return $this->hasMany(UserCategories::class);
-    }
 
 }

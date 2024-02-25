@@ -30,27 +30,42 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('admin.users.index')}}">
         <i class="fas fa-fw fa-users"></i>
         <span>Users</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{{route('admin.category.index')}}">
-        <i class="fas fa-fw fa-users"></i>
-        <span>Category</span></a>
+        <i class="fas fa-fw fa-list"></i>
+        <span>Fasting Type</span></a>
 </li>
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-calendar"></i>
-        <span>Food Category</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">           
-            <a class="collapse-item" href="{{route('admin.food.index')}}">List</a>
-            <a class="collapse-item" href="#">Add</a>
-        </div>
-    </div>
+    <a class="nav-link" href="{{route('admin.food.index')}}">
+        <i class="fas fa-fw fa-list"></i>
+        <span>Food Category</span></a>
+</li>
+<!--<li class="nav-item">-->
+<!--    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"-->
+<!--        aria-expanded="true" aria-controls="collapseTwo">-->
+<!--        <i class="fas fa-fw fa-list"></i>-->
+<!--        <span>Food Category</span>-->
+<!--    </a>-->
+<!--    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">-->
+<!--        <div class="bg-white py-2 collapse-inner rounded">           -->
+<!--            <a class="collapse-item" href="{{route('admin.food.index')}}">List</a>-->
+<!--            <a class="collapse-item" href="#">Add</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</li>-->
+<li class="nav-item">
+    <a class="nav-link" href="{{route('admin.recipes.index')}}">
+        <i class="fas fa-fw fa-list"></i>
+        <span>Recipes</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{route('admin.courses.index')}}">
+        <i class="fas fa-fw fa-list"></i>
+        <span>Courses</span></a>
 </li>
 
 <!-- Sidebar Toggler (Sidebar) -->

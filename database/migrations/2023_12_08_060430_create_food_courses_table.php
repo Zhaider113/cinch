@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('food_id')->nullable();
             $table->foreign('food_id')->references('id')->on('food_categories')->onDelete('cascade');
             $table->string('title')->default("");
-            $table->string('image')->default("");
             $table->string('video')->default("");
             $table->longText('description')->default("");
             $table->timestamps();

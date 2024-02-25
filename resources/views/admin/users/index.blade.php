@@ -37,19 +37,19 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>                        
-                                    <th>Name</th>                                        
-                                    <th>Email</th>                                      
-                                    <th>Phone</th>  
-                                    <!-- <th>Action</th> -->
+                                    <th>First Name</th>                                        
+                                    <th>Last Name</th>                                      
+                                    <th>Email</th>  
+                                     <th>Action</th> 
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>ID</th>                        
-                                    <th>Name</th>                                        
-                                    <th>Email</th>                                      
-                                    <th>Phone</th> 
-                                    <!-- <th>Action</th> -->
+                                    <th>First Name</th>                                        
+                                    <th>Last Name</th>                                      
+                                    <th>Email</th> 
+                                     <th>Action</th> 
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -57,25 +57,23 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>
-                                            <a href="{{route('admin.users.show', ['user' => $user->id])}}">
-                                                <img class="img-profile rounded-circle btn-circle"
-                                                    src="{{ asset($user->profile_image) }}">
-                                                {{ $user->first_name }}&nbsp {{$user->last_name}}
-                                            </a>
+                                                <!--<img class="img-profile rounded-circle btn-circle"-->
+                                                    <!--src="{{ asset($user->profile_image) }}">-->
+                                                {{ $user->first_name }}
                                         </td>
+                                        <td>{{ $user->last_name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->phone }}</td>
-                                        <!-- <td>                                            
+                                         <td>                                            
                                             <div class="row pl-3">                                                    
                                                 <div class = "col-md-2 col-6">
                                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method = "POST">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
-                                                        <button type = "submit" name = "submit" value = "submit" data-toggle="tooltip" title="Disable User" onclick = "return confirm('Do You Really Want to Disable?')" class = "btn btn-sm btn-circle btn-outline-danger" style = "margin-left: -10px;"><i class = "fa fa-ban"></i></button>
+                                                        <button type = "submit" name = "submit" value = "submit" data-toggle="tooltip" title="Disable User" onclick = "return confirm('Do You Really Want to Disable?')" class = "btn btn-sm btn-circle btn-outline-danger" style = "margin-left: -10px;"><i class = "fa fa-trash"></i></button>
                                                     </form>
                                                 </div> 
                                             </div>                                           
-                                        </td> -->
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

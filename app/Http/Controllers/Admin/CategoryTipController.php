@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\CategoryTip;
-use App\Http\Requests\StoreCategoryTipRequest;
-use App\Http\Requests\UpdateCategoryTipRequest;
+use App\Models\FoodCategory;
+use App\Http\Requests\StoreFoodCourseRequest;
+use App\Http\Requests\UpdateFoodCourseRequest;
+use Illuminate\Http\Request;
+use DB;
 
 class CategoryTipController extends Controller
 {
@@ -13,7 +17,18 @@ class CategoryTipController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $recipes = CategoryTip::get();
+            foreach($recipes as $recipe){
+                $category = FoodCategory::where('id', $course->food_id)->first();
+                $recipe->category = $category->title;
+            }
+            
+            $categories = FoodCategory::get();
+            return view('admin.recipes.index', compact('recipes','categories'));
+        } catch (\Throwable $th) {
+            return back()->with('error', 'There is some trouble to proceed your action');
+        }
     }
 
     /**
@@ -27,23 +42,50 @@ class CategoryTipController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryTipRequest $request)
-    {
+    // public function store(StoreFoodCourseRequest $request)
+    // {
         //
+    // }
+    public function store(Request $request)
+    {
+        
+        
+        $recipe = new CategoryTip;
+        $recipe->food_id  = $request->food_id;
+        $recipe->title = $request->title;
+        $recipe->description = $request->description;
+        
+        if($request->has('image'))
+        {
+            if($request->image->getClientOriginalExtension() == 'PNG' ||$request->image->getClientOriginalExtension() == 'png' || $request->image->getClientOriginalExtension() == 'JPG' || $request->image->getClientOriginalExtension() == 'jpg' || $request->image->getClientOriginalExtension() == 'jpeg' || $request->image->getClientOriginalExtension() == 'JPEG')
+            {
+                $newfilename = md5(mt_rand()) .'.'. $request->image->getClientOriginalExtension();
+                $request->file('image')->move(public_path("/uploads"), $newfilename);
+                $new_path1 = 'uploads/'.$newfilename;
+                $recipe->image = $new_path1;
+    
+            }else{
+                return back()->with('error', 'Choose a Valid Image');
+            }                       
+        }
+        
+        $recipe->save();       
+        return back()->with('message','Course Add successfully');      
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CategoryTip $categoryTip)
+    public function show(FoodCourse $foodCourse)
     {
         //
     }
+    
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CategoryTip $categoryTip)
+    public function edit(FoodCourse $foodCourse)
     {
         //
     }
@@ -51,7 +93,7 @@ class CategoryTipController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryTipRequest $request, CategoryTip $categoryTip)
+    public function update(UpdateFoodCourseRequest $request, FoodCourse $foodCourse)
     {
         //
     }
@@ -59,8 +101,23 @@ class CategoryTipController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CategoryTip $categoryTip)
+    public function destroy($id)
     {
-        //
+         try{
+            $recipe = CategoryTip::find($id);
+
+            if(empty($recipe))
+            {
+                return back()->with('error', 'Recipe does not Exists!');
+            }            
+
+            $recipe->delete();
+
+            return back()->with('message', 'Recipe  Deleted');
+
+        }catch(\Exception $e)
+        {
+            return back()->with('error', 'There is some trouble to proceed your action!');
+        }
     }
 }

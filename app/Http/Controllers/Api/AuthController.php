@@ -64,7 +64,7 @@ class AuthController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'weight' => 'required|string',
+            // 'country_code' => 'sometimes|nullable',
             // 'phone' => 'sometimes|nullable|unique:users',         
             'password' => 'required|string|min:6',
             'confirm_password' => 'required|min:6|same:password',            
@@ -78,7 +78,6 @@ class AuthController extends Controller
         $user = new User;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-        $user->weight = $request->weight;
         $user->email = $request->email;
         if($request->has('country_code') && !empty($request->country_code))
         {

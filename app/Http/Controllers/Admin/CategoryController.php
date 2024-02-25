@@ -32,7 +32,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category;
+        $category->title  = $request->title;
+        $category->start_time = $request->start_time;
+        $category->end_time = $request->end_time;
+        $category->save();  
+        
+        return back()->with('message','Category Add successfully'); 
     }
 
     /**
@@ -62,8 +68,23 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+         try{
+            $category = Category::find($id);
+
+            if(empty($category))
+            {
+                return back()->with('error', 'Category does not Exists!');
+            }            
+
+            $category->delete();
+
+            return back()->with('message', 'Category  Deleted');
+
+        }catch(\Exception $e)
+        {
+            return back()->with('error', 'There is some trouble to proceed your action!');
+        }
     }
 }
