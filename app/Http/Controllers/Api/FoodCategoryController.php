@@ -75,4 +75,33 @@ class FoodCategoryController extends Controller
             return $this->error($th->getMessage());
         }
     }
+
+    public function add_recipes(Request $request){
+        try {
+            $recipe = new Recipes;
+            $recipe->food_id  = $request->food_id;
+            $recipe->user_id  = $request->user_id;
+            $recipe->title = $request->title;
+            $recipe->description = $request->description;
+            $recipe->time_to_prepare = $request->time_to_prepare;
+            if($request->has('image'))
+            {
+                if($request->image->getClientOriginalExtension() == 'PNG' ||$request->image->getClientOriginalExtension() == 'png' || $request->image->getClientOriginalExtension() == 'JPG' || $request->image->getClientOriginalExtension() == 'jpg' || $request->image->getClientOriginalExtension() == 'jpeg' || $request->image->getClientOriginalExtension() == 'JPEG')
+                {
+                    $newfilename = md5(mt_rand()) .'.'. $request->image->getClientOriginalExtension();
+                    $request->file('image')->move(public_path("/uploads"), $newfilename);
+                    $new_path1 = 'uploads/'.$newfilename;
+                    $recipe->image = $new_path1;
+        
+                }else{
+                    return $this->error("File must be type of Image..!");
+                }                       
+            }
+            
+            $recipe->save();       
+            return $this->success(["message", "Recipe Added Successfully"]);
+        } catch (\Throwable $th) {
+            return $this->error($th->getMessage());
+        }  
+    }
 }

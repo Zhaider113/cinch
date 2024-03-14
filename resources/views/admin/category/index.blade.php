@@ -4,7 +4,7 @@
 <div class="mt-3">
     <div class="row">
         <div class="col-md-9 ">
-            <h4>Categgory List</h4>
+            <h4>Fasting List</h4>
             @if(session()->has('message'))
                 <div class="alert alert-success text-center">
                     {{ session()->get('message') }}
@@ -20,7 +20,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route ('admin.dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Category List</li>
+                    <li class="breadcrumb-item active" aria-current="page">Fasting List</li>
                 </ol>
             </nav>
         </div>
@@ -29,7 +29,7 @@
         <div class="col-md-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Category Data</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Fasting Data</h6>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New</button>
                 </div>
                 <div class="card-body">

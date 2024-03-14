@@ -67,7 +67,11 @@
         <i class="fas fa-fw fa-list"></i>
         <span>Courses</span></a>
 </li>
-
+<li class="nav-item">
+    <a class="nav-link" href="{{route('admin.user-recipes')}}">
+        <i class="fas fa-fw fa-list"></i>
+        <span>User Recipes</span></a>
+</li>
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>

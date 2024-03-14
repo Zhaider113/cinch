@@ -39,6 +39,7 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', '
     Route::resource('food', App\Http\Controllers\Admin\FoodCategoryController::class);
     Route::resource('courses', App\Http\Controllers\Admin\FoodCourseController::class);
     Route::resource('recipes', App\Http\Controllers\Admin\RecipesController::class);
+    Route::get('user-recipes', [App\Http\Controllers\Admin\RecipesController::class, 'user_recipe'])->name('user-recipes');
 });
 
 Route::prefix('dev')->group(function(){

@@ -7,6 +7,7 @@ use App\Models\Recipes;
 use App\Models\FoodCategory;
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class RecipesController extends Controller
 {
@@ -16,7 +17,7 @@ class RecipesController extends Controller
     public function index()
     {
         try {
-            $recipes = Recipes::get();
+            $recipes = Recipes::where('user_id', '=', auth::user()->id)->get();
             foreach($recipes as $recipe){
                 $category = FoodCategory::where('id', $recipe->food_id)->first();
                 $recipe->category = $category->title;
@@ -46,30 +47,33 @@ class RecipesController extends Controller
     // }
     public function store(Request $request)
     {
-        
-        
-        $recipe = new Recipes;
-        $recipe->food_id  = $request->food_id;
-        $recipe->title = $request->title;
-        $recipe->description = $request->description;
-        $recipe->time_to_prepare = $request->time_to_prepare;
-        
-        if($request->has('image'))
-        {
-            if($request->image->getClientOriginalExtension() == 'PNG' ||$request->image->getClientOriginalExtension() == 'png' || $request->image->getClientOriginalExtension() == 'JPG' || $request->image->getClientOriginalExtension() == 'jpg' || $request->image->getClientOriginalExtension() == 'jpeg' || $request->image->getClientOriginalExtension() == 'JPEG')
+        try {
+            $recipe = new Recipes;
+            $recipe->food_id  = $request->food_id;
+            $recipe->user_id  = auth::user()->id;
+            $recipe->title = $request->title;
+            $recipe->description = $request->description;
+            $recipe->time_to_prepare = $request->time_to_prepare;
+            
+            if($request->has('image'))
             {
-                $newfilename = md5(mt_rand()) .'.'. $request->image->getClientOriginalExtension();
-                $request->file('image')->move(public_path("/uploads"), $newfilename);
-                $new_path1 = 'uploads/'.$newfilename;
-                $recipe->image = $new_path1;
-    
-            }else{
-                return back()->with('error', 'Choose a Valid Image');
-            }                       
-        }
+                if($request->image->getClientOriginalExtension() == 'PNG' ||$request->image->getClientOriginalExtension() == 'png' || $request->image->getClientOriginalExtension() == 'JPG' || $request->image->getClientOriginalExtension() == 'jpg' || $request->image->getClientOriginalExtension() == 'jpeg' || $request->image->getClientOriginalExtension() == 'JPEG')
+                {
+                    $newfilename = md5(mt_rand()) .'.'. $request->image->getClientOriginalExtension();
+                    $request->file('image')->move(public_path("/uploads"), $newfilename);
+                    $new_path1 = 'uploads/'.$newfilename;
+                    $recipe->image = $new_path1;
         
-        $recipe->save();       
-        return back()->with('message','Recipe Add successfully');      
+                }else{
+                    return back()->with('error', 'Choose a Valid Image');
+                }                       
+            }
+            
+            $recipe->save();       
+            return back()->with('message','Recipe Add successfully');   
+        } catch (\Throwable $th) {
+            return back()->with('error','Recipe Add failed'); 
+        }   
     }
 
     /**
@@ -117,6 +121,21 @@ class RecipesController extends Controller
         }catch(\Exception $e)
         {
             return back()->with('error', 'There is some trouble to proceed your action!');
+        }
+    }
+
+    public function user_recipe(){
+        try {
+            $recipes = Recipes::where('user_id', '!=', auth::user()->id)->get();
+            foreach($recipes as $recipe){
+                $category = FoodCategory::where('id', $recipe->food_id)->first();
+                $recipe->category = $category->title;
+            }
+            
+            $categories = FoodCategory::get();
+            return view('admin.recipes.user_recipe', compact('recipes','categories'));
+        } catch (\Throwable $th) {
+            return back()->with('error', 'There is some trouble to proceed your action');
         }
     }
 }

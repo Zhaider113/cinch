@@ -49,6 +49,7 @@ Route::group(['prefix' => 'v1/app'], function(){
     Route::get('view-tip/{id}', [CategoryController::class, 'viewTip']); 
     
     Route::get('recipes', [FoodCategoryController::class, 'recipes']);      
+    Route::post('add-recipes', [FoodCategoryController::class, 'add_recipes']);      
     Route::get('recipe_details/{id}', [FoodCategoryController::class, 'recipe_details']); 
 
 });
