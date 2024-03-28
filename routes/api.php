@@ -50,6 +50,7 @@ Route::group(['prefix' => 'v1/app'], function(){
     
     Route::get('recipes', [FoodCategoryController::class, 'recipes']);      
     Route::post('add-recipes', [FoodCategoryController::class, 'add_recipes']);      
+    Route::post('update-time', [CategoryController::class, 'update_time']);       
     Route::get('recipe_details/{id}', [FoodCategoryController::class, 'recipe_details']); 
 
 });

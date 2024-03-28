@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\CategoryTip;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -49,5 +50,16 @@ class CategoryController extends Controller
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
+    }
+
+    public function update_time(Request $request)
+    {
+        $userCategory = UserCategories::where('category_id', $request->id)->where('user_id', Auth::user()->id)->first();
+        $userCategory->title  = $request->id;
+        $userCategory->start_time = $request->start_time;
+        $userCategory->end_time = $request->end_time;
+        $userCategory->save();  
+        
+        return back()->with('message','User Category updated successfully'); 
     }
 }
