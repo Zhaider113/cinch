@@ -54,12 +54,16 @@ class CategoryController extends Controller
 
     public function update_time(Request $request)
     {
-        $userCategory = UserCategories::where('category_id', $request->id)->where('user_id', Auth::user()->id)->first();
-        $userCategory->title  = $request->id;
-        $userCategory->start_time = $request->start_time;
-        $userCategory->end_time = $request->end_time;
-        $userCategory->save();  
-        
-        return back()->with('message','User Category updated successfully'); 
+        try{
+            $userCategory = UserCategories::where('category_id', $request->id)->where('user_id', Auth::user()->id)->first();
+            $userCategory->title  = $request->id;
+            $userCategory->start_time = $request->start_time;
+            $userCategory->end_time = $request->end_time;
+            $userCategory->save();  
+            
+            return back()->with('message','User Category updated successfully'); 
+        } catch (\Throwable $th) {
+            return $this->error($th->getMessage());
+        }
     }
 }

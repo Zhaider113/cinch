@@ -4,12 +4,12 @@
 <div class="row">
     <div class="col-md-8">
         @if(session()->has('message'))
-            <div class="alert alert-success text-center">
+            <div class="alert alert-success text-center" role="alert">
                 {{ session()->get('message') }}
             </div>
         @endif
         @if(session()->has('error'))
-            <div class="alert alert-danger text-center">
+            <div class="alert alert-danger text-center" role="alert">
                 {{ session()->get('error') }}
             </div>
         @endif
@@ -59,3 +59,8 @@
 
 
 @endsection
+<script>
+    setTimeout(() => {
+    $('.alert').alert('close');
+  }, 2000);
+</script>

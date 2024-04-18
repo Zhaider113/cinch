@@ -128,6 +128,7 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('theme/js/demo/datatables-demo.js') }}"></script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 function initAutocomplete() {
   // Create the search box and link it to the UI element.

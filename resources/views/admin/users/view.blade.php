@@ -191,3 +191,8 @@
 </div> 
     
 @endsection
+<script>
+    setTimeout(() => {
+    $('.alert').alert('close');
+  }, 2000);
+</script>
