@@ -197,6 +197,16 @@ function initAutocomplete() {
 
 window.initAutocomplete = initAutocomplete;
 </script>
+<script>
+  $("document").ready(function(){
+        setTimeout(function(){
+            $("div.alert").remove();
+        }, 5000 ); // 5 secs
+    });
+    function myFunction() {
+        document.getElementById("myForm").reset();
+    }
+</script>
 </body>
 
 </html>
